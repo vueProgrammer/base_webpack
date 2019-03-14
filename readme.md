@@ -26,6 +26,7 @@
   /lib/rem.js 自动转换 rem html font-size 标准
 
 目前功能：
+
   css抽离压缩
 
   css自动生成浏览器兼容代码 例如：-webkit- -ms-
@@ -49,4 +50,3 @@
   开启gzip压缩
 
   封装axios，支持 get post 拦截 可新增其他方法。
-  
