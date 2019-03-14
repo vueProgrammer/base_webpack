@@ -27,14 +27,26 @@
 
 目前功能：
   css抽离压缩
+
   css自动生成浏览器兼容代码 例如：-webkit- -ms-
+
   js压缩分离
+
   html生成与压缩
+
   图片转base64及压缩
+
   代码检测及错误提示
+
   打包前清理dist目录
+
   打包缓存
+
   es6转es5
+
   css自动px转rem  //基准值在 postcss.config.js 中
+
   开启gzip压缩
+
   封装axios，支持 get post 拦截 可新增其他方法。
+  
