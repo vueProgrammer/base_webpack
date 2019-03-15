@@ -17,6 +17,7 @@
     this.osInfo();
   },
   setSize : function () {
+    var baseFont;
     var root = document.documentElement;
     var deviceWidth = parseInt(root.clientWidth);
     var deviceHeight = parseInt(root.clientHeight);
