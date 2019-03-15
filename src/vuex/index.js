@@ -18,14 +18,9 @@ const getters = {
 const actions = {
   // 参数列表：{commit, state} state指的是state数据 commit调用mutations的方法  假设userInfoData是调用后台接口得到的数据
   getUserInfoData({ commit, state }) {
-    let userInfoData
     // 发送请求
     getData.login().then(res => {
-      userInfoData = res.data.subjects
-    })
-    .then(res => {
-      // 调用mutaions里面的方法
-      commit("setUserInfo", userInfoData);
+      commit("setUserInfo", res.data.subjects);
     })
   }
 };
