@@ -25,6 +25,23 @@
 
   /lib/rem.js 自动转换 rem html font-size 标准
 
+  3.15更新
+
+      增加vuex
+
+      本次未对vuex中的 state actions mutations 做分组件区分，可根据需求自己确定是否进行区分
+
+      测试调用的是豆瓣电影热播前20，仅用于测试
+
+      增加vuex数据缓存，页面刷新数据不丢失
+
+      http.js中请求拦截器中的token验证已关闭，可根据业务需求进行释放
+
+      wepack.base.config 文件中的代码校验模块已注释，可根据部门需求进行释放
+
+      .babelrc 文件对浏览器兼容的区间进行调整
+
+
 目前功能：
 
     css抽离压缩

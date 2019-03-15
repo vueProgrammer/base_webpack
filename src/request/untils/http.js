@@ -49,9 +49,9 @@ const errorHandle = (status, other) => {
 }
 
 // 创建axios实例
-var instance = axios.create({ timeout: 1000 * 12 });
+var instance = axios.create({ timeout: 10000 });
 // 设置post请求头
-instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+instance.defaults.headers.post['Content-Type'] = 'Access-Control-Allow-Origin';
 /**
  * 请求拦截器
  * 每次请求前，如果存在token则在请求头中携带token
@@ -59,8 +59,8 @@ instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlenco
 instance.interceptors.request.use(
   config => {
     // 登录流程控制中，根据本地是否存在token判断用户的登录情况 及 token 是否过期
-    const token = '123';
-    token && (config.headers.Authorization = token);
+    // const token = '123';
+    // token && (config.headers.Authorization = token);
     return config;
   },
   error => Promise.error(error)
@@ -68,6 +68,7 @@ instance.interceptors.request.use(
 
 // 响应拦截器
 instance.interceptors.response.use(
+
   // 请求成功
   res => res.status === 200 ? Promise.resolve(res) : Promise.reject(res),
   // 请求失败

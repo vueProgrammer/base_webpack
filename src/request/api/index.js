@@ -7,10 +7,8 @@ import qs from 'qs' // 根据需求是否导入qs模块
 
 const getData = {
   // get,演示
-  articleDetail () {
-    return axios.get(API.getAddresse, {
-      params: params
-    })
+  getMovie () {
+    return axios.get(API.getMovie)
   },
   // get,演示
   articleDetail (id) {
@@ -20,7 +18,7 @@ const getData = {
   },
   // post 提交
   login () {
-    return axios.post(API.getAddresse)
+    return axios.post(API.getMovie)
   }
 }
 

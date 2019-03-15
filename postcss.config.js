@@ -4,9 +4,9 @@ module.exports = {
     'autoprefixer': {
       browsers: [
         "defaults",
-        "not ie < 11",
+        "ie >= 10",
         "last 2 versions",
-        "> 1%",
+        "> 0.2%",
         "iOS 7",
         "last 10 versions"
       ]

@@ -74,9 +74,10 @@ module.exports=merge(baseWebpackConfig,{
     useLocalIp:false,//此选项允许浏览器使用你的本地ip打开
     proxy:{//代理服务器
       "/api":{
-        target:"http://localhost:8080",
+        target:"https://api.douban.com",
         changeOrigin:true,
-        pathRewrite:{"^api":"/api"}
+        pathRewrite:{"^api":""},
+        secure: false,
       }
     }
   },
