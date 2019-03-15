@@ -17,16 +17,8 @@
      break
  }
 
- let key = ''
- switch (process.env.NODE_ENV) {
-   case 'development':key = '12345';break;
-   case 'test':key = '12346789';break;
-   case 'production':key = '123123123';break;
- }
-
  let API = {
    getMovie:'https://bird.ioliu.cn/v1/?url=http://api.douban.com/v2/movie/in_theaters',
-   key:`key=${key}`
-
  }
+ 
 export default API
