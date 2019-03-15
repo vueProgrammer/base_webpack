@@ -1,6 +1,5 @@
 <template>
   <div class="li">
-    <p @click="updateUserInfo">点击</p>
     <!-- 此处调用的 userInfo 是 computed 中的函数方法，此处 userInfo 输出的是 this.$store.getters.userInfo -->
     <span v-for="item in userInfo" :key='item.key'>{{ item.title }}</span>
   </div>
@@ -13,6 +12,9 @@ export default {
     return {
       //
     }
+  },
+  created(){
+    this.$store.dispatch('getUserInfoData');
   },
   mounted() {
     // 接口调用演示

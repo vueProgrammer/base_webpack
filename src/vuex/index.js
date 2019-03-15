@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import getData from '@/request/api'
 import VuexPersistence from 'vuex-persist'
+
+import getData from '@/request/api'
 
 Vue.use(Vuex)
 
