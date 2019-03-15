@@ -1,13 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import getData from '@/request/api'
-
 import VuexPersistence from 'vuex-persist'
 
-
 Vue.use(Vuex)
-
-
 
 const state = {
   userInfo: {}
@@ -40,9 +36,9 @@ const mutations = {
     state.userInfo = info
   }
 };
-
+// 缓存数据
 const persist = new VuexPersistence({
-  // 其他参数看文档
+  // 其他参数见 vuex-persist 文档
   storage: window.sessionStorage
 })
 
