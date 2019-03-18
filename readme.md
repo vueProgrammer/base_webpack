@@ -45,6 +45,8 @@
 
       增加image自动合成雪碧图功能，配置文件为： postcss.config.js
 
+      增加 build 之后自动删除 console.log 代码
+
       解决 uglifyjs-webpack-plugin 版本原因打包报错问题
 
 
