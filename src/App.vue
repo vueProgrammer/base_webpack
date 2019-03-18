@@ -8,7 +8,7 @@
 
 <script>
 import List from '@/components/list.vue'
-
+console.log('222222')
 export default {
   name: 'Vue',
   data () {

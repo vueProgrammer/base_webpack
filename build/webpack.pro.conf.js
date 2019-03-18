@@ -74,7 +74,14 @@ module.exports=merge(baseWebpackConfig,{
       new UglifyJsPlugin({
         cache: true,
         parallel: true,
-        sourceMap: true
+        sourceMap: true,
+        uglifyOptions: {
+          compress: {
+            warnings: false, // 清除 waring
+            drop_console: true, // 清除 console
+            drop_debugger:true //清除 debugger
+          }
+        }
       }),
       new OptimizeCSSAssetsPlugin({})
     ],

@@ -1,5 +1,6 @@
 <template>
   <div class="li">
+    <img src="../assent/logo.png" alt="">
     <div class="icon_test">
       <em></em><em></em><em></em>
     </div>
@@ -17,6 +18,7 @@ export default {
     }
   },
   created(){
+    console.log('11111')
     this.$store.dispatch('getUserInfoData');
   },
   mounted() {

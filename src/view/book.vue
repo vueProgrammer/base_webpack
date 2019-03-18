@@ -7,6 +7,7 @@
 
 <script>
 import List from '@/components/list'
+console.log('3333333')
 export default {
   name: "Book",
   data() {
