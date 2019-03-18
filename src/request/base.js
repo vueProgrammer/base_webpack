@@ -20,5 +20,5 @@
  let API = {
    getMovie:'https://bird.ioliu.cn/v1/?url=http://api.douban.com/v2/movie/in_theaters',
  }
- 
+
 export default API

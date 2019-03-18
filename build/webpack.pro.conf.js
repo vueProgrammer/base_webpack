@@ -6,6 +6,7 @@ const path=require('path');
 const DIST_PATH=path.resolve(__dirname,"../dist");
 //打包之前清除文件
 const CleanWebpackPlugin=require('clean-webpack-plugin');
+// html生成优化
 const HtmlWebpackPlugin=require('html-webpack-plugin');
 //打包的时候分析包大小等
 const BundleAnalyzerPlugin=require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
@@ -19,7 +20,7 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg)(\?.*)?$/i;
 
 module.exports=merge(baseWebpackConfig,{
-  mode:"production",//会将 process.env.NODE_ENV 的值设为 production。
+  mode:"production",//设置 process.env.NODE_ENV = production。
   devtool:'cheap-module-source-map',//不带列映射(column-map)的 SourceMap，将加载的 Source Map 简化为每行单独映射。
   output:{
     filename:"js/[name].[hash:8].js",
@@ -73,15 +74,15 @@ module.exports=merge(baseWebpackConfig,{
       new UglifyJsPlugin({
         cache: true,
         parallel: true,
-        sourceMap: true // set to true if you want JS source maps
+        sourceMap: true
       }),
       new OptimizeCSSAssetsPlugin({})
     ],
     splitChunks: {
-      // 默认将node_modules中依赖打包到venders.js
+      // 默认将node_modules中依赖打包到 venders.js
       chunks: 'all'
     },
-    // 将webpack运行时生成代码打包到runtime.js
+    // 将 webpack 运行时生成代码打包到 runtime.js
     runtimeChunk: true
   },
   plugins:[
