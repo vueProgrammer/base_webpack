@@ -22,13 +22,6 @@ module.exports = {
         use:'vue-loader'
       },
       {
-        test:/\.js$/,
-        use:'babel-loader',
-        //排除node_modules目录下的文件
-        exclude:/node_modules/,
-        include:SRC_PATH
-      },
-      {
         test:/\.(woff|svg|eot|woff2|tff)$/,
         use:[
           {

@@ -2,6 +2,7 @@
 
 //引入webpack模块
 const webpack = require('webpack');
+const path = require('path');
 //webpack-merge提供了一个merge连接数组并合并创建新对象的函数。
 const merge = require('webpack-merge');
 //引入基础webpack设置。
@@ -48,12 +49,19 @@ module.exports=merge(baseWebpackConfig,{
         test:/\.(png|svg|jpg|gif)$/,
         use:[
           {
-            loader:'file-loader',
+            loader:'url-loader',
             options:{
-              limit:10000,
+              limit:10240
             }
           }
         ]
+      },
+      {
+        test:/\.js$/,
+        use:'babel-loader',
+        //排除node_modules目录下的文件
+        exclude:/node_modules/,
+        include:path.resolve(__dirname,"../src")
       }
     ]
   },

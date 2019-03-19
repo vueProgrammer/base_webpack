@@ -116,7 +116,8 @@ module.exports=merge(baseWebpackConfig,{
       chunks: 'all'
     },
     // 将 webpack 运行时生成代码打包到 runtime.js
-    runtimeChunk: true
+    runtimeChunk: true,
+    concatenateModules:true
   },
   plugins:[
     new CleanWebpackPlugin({root:path.resolve(__dirname,'../'),verbose:true}),//每次打包前清除dist
