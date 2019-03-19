@@ -1,6 +1,8 @@
 <template>
   <div class="li">
     <img src="../assent/logo.png" alt="">
+    <img src="../assent/btn_begin.png" alt="">
+    <div class="test"></div>
     <div class="icon_test">
       <em></em><em></em><em></em>
     </div>
@@ -67,5 +69,11 @@ export default {
 }
 .icon_test em:nth-of-type(3){
   background-image: url(../assent/sprites/gou.png);
+}
+.test{
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  background-image: url(../assent/btn_begin.png);
 }
 </style>

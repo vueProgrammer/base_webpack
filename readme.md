@@ -49,6 +49,12 @@
 
       解决 uglifyjs-webpack-plugin 版本原因打包报错问题
 
+  3.19 更新
+
+      修复html中的img src和样式中背景图url 最终打包路径不一致问题
+
+      增加 HappyPack 打包速度优化 ，小型项目没必要开启，可按需关闭
+
 
 目前功能：
 
@@ -75,3 +81,11 @@
     开启gzip压缩
 
     封装axios，支持 get post 拦截 可新增其他方法。
+
+    自动合并雪碧图
+
+    自动删除console
+
+    vuex数据缓存
+
+    webpack 接口代理

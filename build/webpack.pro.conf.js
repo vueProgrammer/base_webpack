@@ -18,6 +18,8 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 // 开启gzip压缩
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg)(\?.*)?$/i;
+// 优化打包速度
+const HappyPack = require('happypack');
 
 module.exports=merge(baseWebpackConfig,{
   mode:"production",//设置 process.env.NODE_ENV = production。
@@ -31,7 +33,12 @@ module.exports=merge(baseWebpackConfig,{
       {
         test:/\.css$/,
         use:[
-          MiniCssExtractPlugin.loader,
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+               publicPath: '../',
+            }
+          },
           {loader:'css-loader'},
           {loader:"postcss-loader"}
         ]
@@ -39,7 +46,12 @@ module.exports=merge(baseWebpackConfig,{
       {
         test:/\.(sc|sa)ss$/,
         use:[
-          MiniCssExtractPlugin.loader,
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+               publicPath: '../',
+            }
+          },
           {loader:'css-loader'},
           {loader:"sass-loader"},
           {loader:"postcss-loader"}
@@ -48,7 +60,12 @@ module.exports=merge(baseWebpackConfig,{
       {
         test:/\.less$/,
         use:[
-          MiniCssExtractPlugin.loader,
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+               publicPath: '../',
+            }
+          },
           {loader:'css-loader'},
           {loader:'less-loader'},
           {loader:"postcss-loader"}
@@ -58,15 +75,22 @@ module.exports=merge(baseWebpackConfig,{
         test:/\.(png|svg|jpg|gif)$/,
         use:[
           {
-            loader:'file-loader',
+            loader:'url-loader',
             options:{
-              limit:10000,
-              name:"[hash:8].[ext]",
+              limit:10240,
+              name:"[name].[hash:8].[ext]",
               outputPath:"images/"
             }
           }
         ]
+      },
+      {
+        test:/\.js$/,
+        exclude: '/node_modules/',
+        include:path.resolve(__dirname,"../src"),
+        use:'HappyPack/loader?id=buildjs',
       }
+
     ]
   },
   optimization: {
@@ -119,6 +143,28 @@ module.exports=merge(baseWebpackConfig,{
       test: productionGzipExtensions,
       threshold: 10240,
       minRatio: 0.8
+    }),
+    new HappyPack({
+      id:'buildjs',//use:'HappyPack/loader?id=buildjs'
+      use:[{
+        loader:'babel-loader',
+        options:{
+          presets:[
+            '@babel/preset-env'
+          ],
+          plugins:[
+            "@babel/plugin-transform-runtime",
+            ['import',{
+              libraryName:'antd',
+              libraryDirectory: 'es',
+              style:true
+            }]
+          ],
+          //缓存打包过的内容
+          cacheDirectory: true
+        }
+      }]
     })
+
   ]
 });
