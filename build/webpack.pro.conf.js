@@ -15,6 +15,8 @@ const MiniCssExtractPlugin=require('mini-css-extract-plugin');
 // 压缩css
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+// 分离公用js
+const AutoDllPlugin = require('autodll-webpack-plugin');
 // 开启gzip压缩
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg)(\?.*)?$/i;
@@ -22,13 +24,16 @@ const productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg)(\?.*)?$/i;
 const HappyPack = require('happypack');
 const os = require('os');
 const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
+// 加缓存
+const hardSourcePlugin = require('hard-source-webpack-plugin');
 
 module.exports=merge(baseWebpackConfig,{
   mode:"production",//设置 process.env.NODE_ENV = production。
   devtool:'cheap-module-source-map',//不带列映射(column-map)的 SourceMap，将加载的 Source Map 简化为每行单独映射。
   output:{
     filename:"js/[name].[hash:8].js",
-    path:DIST_PATH
+    path:DIST_PATH,
+    publicPath: './'
   },
   module:{
     rules:[
@@ -123,6 +128,7 @@ module.exports=merge(baseWebpackConfig,{
     new CleanWebpackPlugin({root:path.resolve(__dirname,'../'),verbose:true}),//每次打包前清除dist
     new HtmlWebpackPlugin({
       //将目录下的index.html引进生成的dist中的index.html
+      inject: true,
       template:'index.html',
       title:'生产环境title',
       favicon:'',
@@ -131,6 +137,20 @@ module.exports=merge(baseWebpackConfig,{
         collapseWhitespace:true,
         removeAttributeQuotes:true
       },
+    }),
+    new AutoDllPlugin({
+      inject: true, // will inject the DLL bundle to index.html
+      debug: true,
+      filename: '[name].js',
+      path: './dll',
+      entry: {
+        vendor: [
+          'vue',
+          'vue-router',
+          'vuex',
+          'axios'
+        ]
+      }
     }),
     new BundleAnalyzerPlugin({//打包分析
       analyzerPort:10000, // 打包分析端口
@@ -156,7 +176,7 @@ module.exports=merge(baseWebpackConfig,{
       threadPool: happyThreadPool,
       //允许 HappyPack 输出日志
       verbose: true,
-    })
-
+    }),
+    new hardSourcePlugin()
   ]
 });

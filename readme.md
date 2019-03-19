@@ -55,6 +55,10 @@
 
       增加 HappyPack 打包速度优化 ，小型项目没必要开启，可按需关闭
 
+      使用autodll-webpack-plugin插件分离公用js插件  已分离 vue vuex vue-router axios
+
+      开启webpack缓存
+
 
 目前功能：
 
