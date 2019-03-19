@@ -20,6 +20,8 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg)(\?.*)?$/i;
 // 优化打包速度
 const HappyPack = require('happypack');
+const os = require('os');
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
 module.exports=merge(baseWebpackConfig,{
   mode:"production",//设置 process.env.NODE_ENV = production。
@@ -147,23 +149,12 @@ module.exports=merge(baseWebpackConfig,{
     new HappyPack({
       id:'buildjs',//use:'HappyPack/loader?id=buildjs'
       use:[{
-        loader:'babel-loader',
-        options:{
-          presets:[
-            '@babel/preset-env'
-          ],
-          plugins:[
-            "@babel/plugin-transform-runtime",
-            ['import',{
-              libraryName:'antd',
-              libraryDirectory: 'es',
-              style:true
-            }]
-          ],
-          //缓存打包过的内容
-          cacheDirectory: true
-        }
-      }]
+        loader:'babel-loader?cacheDirectory=true'
+      }],
+      //共享进程池
+      threadPool: happyThreadPool,
+      //允许 HappyPack 输出日志
+      verbose: true,
     })
 
   ]
