@@ -10,7 +10,7 @@ module.exports = {
   },
   //Resolve 配置 Webpack 如何寻找模块所对应的文件,extensions:在导入语句没带文件后缀时，Webpack 会自动带上后缀后去尝试访问文件是否存在。alias: 配置项通过别名来把原导入路径映射成一个新的导入路径。
   resolve:{
-    extensions:['.vue','.js'],
+    extensions:['.vue','.js','.json'],
     alias:{
       '@':SRC_PATH
     }

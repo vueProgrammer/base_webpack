@@ -4,28 +4,19 @@ const baseWebpackConfig=require('./webpack.base.conf.js');
 const webpack=require('webpack');
 const path=require('path');
 const DIST_PATH=path.resolve(__dirname,"../dist");
-//打包之前清除文件
-const CleanWebpackPlugin=require('clean-webpack-plugin');
-// html生成优化
-const HtmlWebpackPlugin=require('html-webpack-plugin');
-//打包的时候分析包大小等
-const BundleAnalyzerPlugin=require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-//分离css
-const MiniCssExtractPlugin=require('mini-css-extract-plugin');
-// 压缩css
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const CleanWebpackPlugin=require('clean-webpack-plugin'); //打包之前清除文件
+const HtmlWebpackPlugin=require('html-webpack-plugin'); // html生成优化
+const BundleAnalyzerPlugin=require('webpack-bundle-analyzer').BundleAnalyzerPlugin; //打包的时候分析包大小等
+const MiniCssExtractPlugin=require('mini-css-extract-plugin'); //分离css
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin"); // 压缩css
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-// 分离公用js
-const AutoDllPlugin = require('autodll-webpack-plugin');
-// 开启gzip压缩
-const CompressionWebpackPlugin = require('compression-webpack-plugin');
+const AutoDllPlugin = require('autodll-webpack-plugin'); // 分离公用js
+const CompressionWebpackPlugin = require('compression-webpack-plugin'); // 开启gzip压缩
 const productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg)(\?.*)?$/i;
-// 优化打包速度
-const HappyPack = require('happypack');
+const HappyPack = require('happypack'); // 优化打包速度
 const os = require('os');
 const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
-// 加缓存
-const hardSourcePlugin = require('hard-source-webpack-plugin');
+const hardSourcePlugin = require('hard-source-webpack-plugin'); // 加缓存
 
 module.exports=merge(baseWebpackConfig,{
   mode:"production",//设置 process.env.NODE_ENV = production。

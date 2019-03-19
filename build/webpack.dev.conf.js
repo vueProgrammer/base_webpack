@@ -1,18 +1,11 @@
 // 本js为开发环境下的webpack配置
-
-//引入webpack模块
-const webpack = require('webpack');
+const webpack = require('webpack'); //引入webpack模块
 const path = require('path');
-//webpack-merge提供了一个merge连接数组并合并创建新对象的函数。
-const merge = require('webpack-merge');
-//引入基础webpack设置。
-const baseWebpackConfig=require('./webpack.base.conf.js');
-//这是一个webpack插件，可以简化HTML文件的创建。这对于webpack在文件名中包含哈希的包很有用，这些哈希值会更改每个编译。基本作用就是生成HTML。
-const HtmlWebpackPlugin=require('html-webpack-plugin');
-//开发环境的端口号。
-const derServerPort=8082;
-//识别某些类别的webpack错误，并清理，聚合和优先级，以提供更好的开发人员体验。(友好的提示插件)。
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const merge = require('webpack-merge'); //webpack-merge提供了一个merge连接数组并合并创建新对象的函数。
+const baseWebpackConfig=require('./webpack.base.conf.js'); //引入基础webpack设置。
+const HtmlWebpackPlugin=require('html-webpack-plugin'); //美化和创建html
+const derServerPort=8082; //开发环境的端口号。
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin'); //错误提示
 
 module.exports=merge(baseWebpackConfig,{
   mode:'development',//开发环境,会将 process.env.NODE_ENV 的值设为 development。启用 NamedChunksPlugin 和 NamedModulesPlugin
@@ -24,6 +17,7 @@ module.exports=merge(baseWebpackConfig,{
         use:[
           {loader:"style-loader"},
           {loader:"css-loader"},
+          {loader:"less-loader"},
           {loader:"postcss-loader"}
         ]
       },
@@ -59,8 +53,7 @@ module.exports=merge(baseWebpackConfig,{
       {
         test:/\.js$/,
         use:'babel-loader',
-        //排除node_modules目录下的文件
-        exclude:/node_modules/,
+        exclude:/node_modules/, //排除node_modules目录下的文件
         include:path.resolve(__dirname,"../src")
       }
     ]
@@ -90,8 +83,7 @@ module.exports=merge(baseWebpackConfig,{
     }
   },
   plugins:[
-    //处理html
-    new HtmlWebpackPlugin({
+    new HtmlWebpackPlugin({ //处理html
       template:'index.html',//开发环境需要路径
       inject:'body',//所有javascript资源将被放置在body元素的底部
       minify:{
@@ -103,8 +95,7 @@ module.exports=merge(baseWebpackConfig,{
       favicon:'',//将给定的favicon路径添加到输出HTML
       showErrors:true,
     }),
-    //热更新
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.HotModuleReplacementPlugin(), //热更新
     new FriendlyErrorsWebpackPlugin({
       compilationSuccessInfo: {
         messages: [`You application is running here http://localhost:${derServerPort}`],

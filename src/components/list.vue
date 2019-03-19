@@ -48,27 +48,27 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="less">
 .li{
   font-size: 24px;
-}
-.li span{
-  display: block;
+  span {
+    display: block;
+  }
 }
 .icon_test em{
   display: inline-block;
   width: 68px;
   height: 68px;
   background-repeat: no-repeat;
-}
-.icon_test em:nth-of-type(1){
-  background-image: url(../assent/sprites/er.png);
-}
-.icon_test em:nth-of-type(2){
-  background-image: url(../assent/sprites/gao.png);
-}
-.icon_test em:nth-of-type(3){
-  background-image: url(../assent/sprites/gou.png);
+  &:nth-of-type(1){
+    background-image: url(../assent/sprites/er.png);
+  }
+  &:nth-of-type(2){
+    background-image: url(../assent/sprites/gao.png);
+  }
+  &:nth-of-type(3){
+    background-image: url(../assent/sprites/gou.png);
+  }
 }
 .test{
   width: 100px;
