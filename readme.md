@@ -59,6 +59,28 @@
 
       开启webpack缓存
 
+  8.21 更新
+
+      更新完善.eslintr文件配置，不使用eslint代码校验可以删除该配置文件，并删除package.json文件中eslint开头的包
+
+      由于autoprefixer版本更新，打包时会出现大量警告，已修复问题，详情见https://juejin.im/post/5d44086c6fb9a06b2b475abe
+
+      package.json中删除了代码校验命令，命令如下： 
+
+      "lint": "eslint --ext .js,.vue src",
+      "lint:fix": "eslint --fix --ext .js,.vue src"
+
+      .huskyrc文件清空，代码如下：
+
+      {
+        "hooks": {
+          "pre-commit": "npm run lint"
+        }
+      }
+
+      如有需要，可自行添加即可。
+      
+
 
 目前功能：
 
@@ -93,3 +115,4 @@
     vuex数据缓存
 
     webpack 接口代理
+
